@@ -1,0 +1,3 @@
+# Logo Bianco — remplacer ce fichier par le logo officiel
+# Formats acceptés : logo.png (recommandé, fond transparent)
+# Puis mettre hasLogoFile = true dans components/Logo.tsx

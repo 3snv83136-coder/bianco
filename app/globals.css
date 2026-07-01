@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bianco-primary: #c9a77c;
+  --bianco-dark: #121212;
+  --bianco-background: #ffffff;
+  --bianco-surface: #fcfbf9;
+}
+
+body {
+  @apply bg-surface text-dark antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-primary/30 bg-white px-4 py-2.5 text-sm font-semibold text-dark transition hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .card {
+    @apply rounded-2xl border border-primary/10 bg-white p-5 shadow-card;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-dark placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .label-field {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-dark/70;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
