@@ -109,7 +109,7 @@ textarea {
 }
 
 .sw-logo-sub {
-  font-size: 11px;
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
   letter-spacing: 0.45em;
   text-transform: uppercase;
   color: rgba(255, 232, 31, 0.55);
@@ -117,7 +117,7 @@ textarea {
 
 .sw-logo {
   margin-top: 0.5rem;
-  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -129,13 +129,13 @@ textarea {
 }
 
 .sw-crawl-perspective {
-  perspective: 380px;
+  perspective: 420px;
   overflow: hidden;
   mask-image: linear-gradient(
     to bottom,
     transparent 0%,
-    black 18%,
-    black 85%,
+    black 15%,
+    black 88%,
     transparent 100%
   );
 }
@@ -143,41 +143,43 @@ textarea {
 .sw-crawl {
   position: relative;
   top: 100%;
-  width: 82%;
-  max-width: 520px;
+  width: 92%;
+  max-width: 720px;
   margin: 0 auto;
   text-align: justify;
   transform-origin: 50% 100%;
-  animation: sw-crawl 7s linear forwards;
+  animation: sw-crawl 10s linear forwards;
   color: #ffe81f;
 }
 
 .sw-crawl-episode {
   text-align: center;
-  font-size: 11px;
+  font-size: clamp(0.9rem, 3vw, 1.25rem);
   letter-spacing: 0.35em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   opacity: 0.7;
 }
 
 .sw-crawl-title {
   text-align: center;
-  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-size: clamp(2rem, 9vw, 3.5rem);
   font-weight: 800;
   letter-spacing: 0.08em;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
+  line-height: 1.15;
 }
 
 .sw-crawl-body {
-  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
-  line-height: 1.65;
-  font-weight: 500;
+  font-size: clamp(1.5rem, 6.5vw, 2.5rem);
+  line-height: 1.55;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
 .sw-crawl-body strong {
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 1.05em;
   letter-spacing: 0.05em;
 }
 

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { HomeHub } from "./HomeHub";
 
-const INTRO_MS = 7000;
+const INTRO_MS = 10000;
 const SKIP_KEY = "bianco_sw_intro_seen";
 
 export function HomePageClient() {
