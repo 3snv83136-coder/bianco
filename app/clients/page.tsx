@@ -1,5 +1,7 @@
 import { AppShell } from "@/components/AppShell";
 import { ClientForm } from "@/components/clients/ClientForm";
+import { LancerSeanceButton } from "@/components/clients/LancerSeanceButton";
+import { PlanityPaste } from "@/components/clients/PlanityPaste";
 import { getSupabaseOrNull } from "@/lib/supabase";
 import type { Client } from "@/lib/supabase";
 
@@ -23,8 +25,12 @@ export default async function ClientsPage() {
   return (
     <AppShell
       title="Clientes"
-      subtitle="Fiches clientes — peau, allergies, historique des séances"
+      subtitle="Collez une fiche Planity ou créez une cliente manuellement"
     >
+      <div className="mb-6">
+        <PlanityPaste />
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <div className="space-y-3">
           {clients.length === 0 ? (
@@ -34,7 +40,7 @@ export default async function ClientsPage() {
           ) : (
             clients.map((c) => (
               <article key={c.id} className="card">
-                <div className="flex flex-wrap items-start justify-between gap-2">
+                <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h2 className="font-semibold text-dark">
                       {[c.prenom, c.nom].filter(Boolean).join(" ")}
@@ -46,6 +52,10 @@ export default async function ClientsPage() {
                       <p className="text-sm text-dark/60">{c.telephone}</p>
                     )}
                   </div>
+                  <LancerSeanceButton
+                    clientId={c.id}
+                    clientName={[c.prenom, c.nom].filter(Boolean).join(" ")}
+                  />
                 </div>
                 {(c.notes_peau || c.allergies) && (
                   <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -73,7 +83,7 @@ export default async function ClientsPage() {
         <aside>
           <div className="card sticky top-24">
             <h2 className="font-display text-xl font-semibold text-dark">
-              Nouvelle cliente
+              Saisie manuelle
             </h2>
             <div className="mt-4">
               <ClientForm />

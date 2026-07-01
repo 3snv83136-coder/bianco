@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { DiffusionPanel } from "@/components/seances/DiffusionPanel";
@@ -45,6 +46,13 @@ export default async function SeanceDetailPage({
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
         <div className="space-y-6">
+          <Link
+            href={`/seances/${seance.id}/prestation`}
+            className="btn-primary mb-4 inline-flex"
+          >
+            ▶ {seance.statut === "en_cours" ? "Reprendre la prestation" : "Lancer le wizard"}
+          </Link>
+
           {seance.seance_prestations && seance.seance_prestations.length > 0 && (
             <section className="card">
               <h2 className="font-display text-lg font-semibold text-dark">

@@ -43,6 +43,7 @@ export async function sendMemorandumEmail(opts: {
   realise: string;
   conseils: string;
   dateSeance: string;
+  htmlOverride?: string;
 }): Promise<void> {
   if (!process.env.RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY non configurée");
@@ -56,13 +57,15 @@ export async function sendMemorandumEmail(opts: {
   const { Resend } = await import("resend");
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const html = buildMemorandumHtml({
-    prenom: opts.prenom,
-    realise: opts.realise,
-    conseils: opts.conseils,
-    salonNom,
-    dateSeance: opts.dateSeance,
-  });
+  const html =
+    opts.htmlOverride ??
+    buildMemorandumHtml({
+      prenom: opts.prenom,
+      realise: opts.realise,
+      conseils: opts.conseils,
+      salonNom,
+      dateSeance: opts.dateSeance,
+    });
 
   const { error } = await resend.emails.send({
     from: emailFrom,

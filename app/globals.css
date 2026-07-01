@@ -47,3 +47,204 @@ textarea {
     text-wrap: balance;
   }
 }
+
+/* ─── Star Wars intro ─── */
+.sw-universe {
+  background: radial-gradient(ellipse at 50% 40%, #0a0a12 0%, #000000 70%);
+  cursor: pointer;
+}
+
+.sw-stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+.sw-stars-1 {
+  background-image: radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 80px 120px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 150px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 250px 180px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 320px 40px, #fff, transparent);
+  background-size: 350px 200px;
+  animation: sw-drift 8s linear infinite;
+  opacity: 0.7;
+}
+
+.sw-stars-2 {
+  background-image: radial-gradient(1px 1px at 50px 90px, #ffe81f, transparent),
+    radial-gradient(1px 1px at 130px 20px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 200px 150px, #fff, transparent),
+    radial-gradient(2px 2px at 280px 80px, rgba(201, 167, 124, 0.9), transparent);
+  background-size: 300px 180px;
+  animation: sw-drift 12s linear infinite reverse;
+  opacity: 0.5;
+}
+
+.sw-stars-3 {
+  background-image: radial-gradient(1px 1px at 10px 10px, #fff, transparent),
+    radial-gradient(1px 1px at 60px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 110px 140px, #fff, transparent);
+  background-size: 120px 160px;
+  animation: sw-twinkle 2s ease-in-out infinite alternate;
+  opacity: 0.9;
+}
+
+.sw-hyperspace {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 232, 31, 0.03) 50%,
+    transparent 100%
+  );
+  animation: sw-flash 1.2s ease-out forwards;
+  pointer-events: none;
+}
+
+.sw-logo-wrap {
+  animation: sw-logo-in 0.35s ease-out forwards;
+}
+
+.sw-logo-sub {
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(255, 232, 31, 0.55);
+}
+
+.sw-logo {
+  margin-top: 0.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffe81f;
+  text-shadow:
+    0 0 20px rgba(255, 232, 31, 0.6),
+    0 0 40px rgba(255, 232, 31, 0.25);
+  line-height: 1.2;
+}
+
+.sw-crawl-perspective {
+  perspective: 380px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.sw-crawl {
+  position: relative;
+  top: 100%;
+  width: 82%;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: justify;
+  transform-origin: 50% 100%;
+  animation: sw-crawl 7s linear forwards;
+  color: #ffe81f;
+}
+
+.sw-crawl-episode {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  margin-bottom: 0.75rem;
+  opacity: 0.7;
+}
+
+.sw-crawl-title {
+  text-align: center;
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.sw-crawl-body {
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  line-height: 1.65;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.sw-crawl-body strong {
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.sw-skip {
+  animation: sw-pulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes sw-crawl {
+  0% {
+    top: 100%;
+    transform: rotateX(22deg) translateZ(0);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: -55%;
+    transform: rotateX(25deg) translateZ(-80px);
+    opacity: 0;
+  }
+}
+
+@keyframes sw-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sw-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+
+@keyframes sw-twinkle {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sw-flash {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sw-pulse {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.65;
+  }
+}
+

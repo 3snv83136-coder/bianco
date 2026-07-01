@@ -75,6 +75,8 @@ export interface Seance {
   gmb_post_url: string | null;
   photo_url: string | null;
   publish_json: Record<string, unknown> | null;
+  etape_prestation?: number;
+  started_at?: string | null;
   created_at: string;
   updated_at: string;
 }

@@ -8,6 +8,7 @@ const NAV = [
   { href: "/seances", label: "Séances" },
   { href: "/historique", label: "Historique" },
   { href: "/diffusion", label: "Diffusion" },
+  { href: "/produits", label: "Produits" },
   { href: "/parametres", label: "Paramètres" },
 ] as const;
 

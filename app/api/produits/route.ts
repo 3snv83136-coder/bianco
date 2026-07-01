@@ -8,9 +8,10 @@ export async function GET() {
   }
 
   const { data, error } = await db
-    .from("clients")
+    .from("produits")
     .select("*")
-    .order("prenom", { ascending: true });
+    .eq("actif", true)
+    .order("ordre", { ascending: true });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -26,29 +27,25 @@ export async function POST(req: Request) {
   }
 
   const body = (await req.json()) as {
-    prenom?: string;
     nom?: string;
-    email?: string;
-    telephone?: string;
-    notes_peau?: string;
-    allergies?: string;
-    notes?: string;
+    marque?: string;
+    categorie?: string;
+    description?: string;
+    url_achat?: string;
   };
 
-  if (!body.prenom?.trim()) {
-    return NextResponse.json({ error: "Prénom requis" }, { status: 400 });
+  if (!body.nom?.trim()) {
+    return NextResponse.json({ error: "Nom requis" }, { status: 400 });
   }
 
   const { data, error } = await db
-    .from("clients")
+    .from("produits")
     .insert({
-      prenom: body.prenom.trim(),
-      nom: body.nom?.trim() || null,
-      email: body.email?.trim() || null,
-      telephone: body.telephone?.trim() || null,
-      notes_peau: body.notes_peau?.trim() || null,
-      allergies: body.allergies?.trim() || null,
-      notes: body.notes?.trim() || null,
+      nom: body.nom.trim(),
+      marque: body.marque?.trim() || null,
+      categorie: body.categorie?.trim() || "Soin",
+      description: body.description?.trim() || null,
+      url_achat: body.url_achat?.trim() || null,
     })
     .select()
     .single();

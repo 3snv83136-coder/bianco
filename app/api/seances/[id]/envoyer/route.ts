@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { sendMemorandumEmail } from "@/lib/mail-memorandum";
+import { buildMemorandumHtml, sendMemorandumEmail } from "@/lib/mail-memorandum";
+import { buildOrdonnanceHtml } from "@/lib/ordonnance";
 import { getSupabaseOrNull } from "@/lib/supabase";
 
 export async function POST(
@@ -13,7 +14,9 @@ export async function POST(
 
   const { data: seance } = await db
     .from("seances")
-    .select("*, clients(*), memorandums(*)")
+    .select(
+      "*, clients(*), memorandums(*), seance_prestations(nom), seance_produits(nom, marque, url_achat, note_usage)",
+    )
     .eq("id", params.id)
     .maybeSingle();
 
@@ -37,6 +40,34 @@ export async function POST(
 
   const dateSeance = new Date(seance.date_seance).toLocaleDateString("fr-FR");
 
+  const ordonnanceInput = {
+    prenom: seance.clients.prenom,
+    nom: seance.clients.nom,
+    dateSeance,
+    prestations: (seance.seance_prestations ?? []).map(
+      (p: { nom: string }) => p.nom,
+    ),
+    realise: memo.realise,
+    produits: (seance.seance_produits ?? []).map(
+      (p: {
+        nom: string;
+        marque: string | null;
+        url_achat: string | null;
+        note_usage: string | null;
+      }) => ({
+        nom: p.nom,
+        marque: p.marque,
+        urlAchat: p.url_achat,
+        note: p.note_usage,
+      }),
+    ),
+    allergies: seance.clients.allergies,
+  };
+
+  const conseilsJson = memo.conseils_json as { html?: string } | null;
+  const html =
+    conseilsJson?.html ?? buildOrdonnanceHtml(ordonnanceInput);
+
   try {
     await sendMemorandumEmail({
       to: seance.clients.email,
@@ -44,6 +75,7 @@ export async function POST(
       realise: memo.realise,
       conseils: memo.conseils ?? "",
       dateSeance,
+      htmlOverride: html,
     });
   } catch (e) {
     return NextResponse.json(
